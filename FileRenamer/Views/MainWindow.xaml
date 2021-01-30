@@ -9,7 +9,11 @@
     <Grid>
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
 
-        <ListView AllowDrop="True">
+        <ListView Name="fileListView"
+                  ItemsSource="{Binding FileList}"
+                  AllowDrop="True"
+                  >
+
             <i:Interaction.Behaviors>
                 <models:DropBehavior />
             </i:Interaction.Behaviors>

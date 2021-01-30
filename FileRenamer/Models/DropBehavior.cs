@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using FileRenamer.ViewModels;
 using Microsoft.Xaml.Behaviors;
 
 namespace FileRenamer.Models {
@@ -24,7 +25,8 @@ namespace FileRenamer.Models {
         private void AssociatedObject_Drop(object sender, DragEventArgs e) {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-            ((ListView)sender).ItemsSource = makeFileSystemInfoList(files);
+            var vm = ((ListView)sender).DataContext as MainWindowViewModel;
+            vm.FileList = makeFileSystemInfoList(files);
         }
 
         private void AssociatedObject_PreviewDragOver(object sender, DragEventArgs e) {
