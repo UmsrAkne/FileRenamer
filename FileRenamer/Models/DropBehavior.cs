@@ -46,14 +46,7 @@ namespace FileRenamer.Models {
             fileList = new List<FileSystemInfo>();
 
             foreach(string uriString in uris) {
-
-                // パスがディレクトリか？
-                if (File.GetAttributes(uriString).HasFlag(FileAttributes.Directory)) {
-                    fileList.Add(new DirectoryInfo(uriString));
-                }
-                else {
-                    fileList.Add(new FileInfo(uriString));
-                }
+                fileList.Add(new ExFileSystemInfo(uriString));
             }
 
             return fileList;
