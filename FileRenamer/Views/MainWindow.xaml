@@ -14,6 +14,39 @@
                   AllowDrop="True"
                   >
 
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="fullPathTextBlock"
+                                   Text="{Binding FullName}" 
+                                   Grid.Column="0"
+                                   Margin="2,0"
+                                   />
+
+                        <TextBlock x:Name="fileNameTextBlock"
+                                   Text="{Binding Name}" 
+                                   Grid.Column="1"
+                                   Background="WhiteSmoke"
+                                   Margin="2,0"
+                                   />
+
+
+                        <TextBlock x:Name="extensionTextBlock"
+                                   Text="{Binding Extension}" 
+                                   Grid.Column="2"
+                                   Margin="2,0"
+                                   />
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
             <i:Interaction.Behaviors>
                 <models:DropBehavior />
             </i:Interaction.Behaviors>
