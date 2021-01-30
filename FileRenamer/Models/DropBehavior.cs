@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,12 +23,11 @@ namespace FileRenamer.Models {
 
         private void AssociatedObject_Drop(object sender, DragEventArgs e) {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            foreach(string uriString in files) {
-                System.Diagnostics.Debug.WriteLine(uriString);
-            }
+
+            ((ListView)sender).ItemsSource = makeFileSystemInfoList(files);
         }
 
-        private void AssociatedObject_PreviewDragOver(object sender, System.Windows.DragEventArgs e) {
+        private void AssociatedObject_PreviewDragOver(object sender, DragEventArgs e) {
             e.Effects = DragDropEffects.Copy;
             e.Handled = e.Data.GetDataPresent(DataFormats.FileDrop);
         }
@@ -36,6 +36,25 @@ namespace FileRenamer.Models {
             base.OnDetaching();
             this.AssociatedObject.PreviewDragOver -= AssociatedObject_PreviewDragOver;
             this.AssociatedObject.Drop -= AssociatedObject_Drop;
+        }
+
+        private List<FileSystemInfo> makeFileSystemInfoList(string[] uris) {
+
+            List<FileSystemInfo> fileList;
+            fileList = new List<FileSystemInfo>();
+
+            foreach(string uriString in uris) {
+
+                // パスがディレクトリか？
+                if (File.GetAttributes(uriString).HasFlag(FileAttributes.Directory)) {
+                    fileList.Add(new DirectoryInfo(uriString));
+                }
+                else {
+                    fileList.Add(new FileInfo(uriString));
+                }
+            }
+
+            return fileList;
         }
     }
 }
