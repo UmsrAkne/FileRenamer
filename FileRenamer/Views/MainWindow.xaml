@@ -1,0 +1,19 @@
+﻿<Window x:Class="FileRenamer.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:models="clr-namespace:FileRenamer.Models"
+        Title="{Binding Title}" Height="350" Width="525">
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+
+        <ListView AllowDrop="True">
+            <i:Interaction.Behaviors>
+                <models:DropBehavior />
+            </i:Interaction.Behaviors>
+        </ListView>
+
+    </Grid>
+</Window>
