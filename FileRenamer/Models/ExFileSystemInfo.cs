@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FileRenamer.Models {
-    class ExFileSystemInfo : FileSystemInfo {
+    public class ExFileSystemInfo : FileSystemInfo {
 
         private FileSystemInfo fileSystemInfo;
         public bool IsDirectory { get; private set; }

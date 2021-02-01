@@ -40,10 +40,10 @@ namespace FileRenamer.Models {
             this.AssociatedObject.Drop -= AssociatedObject_Drop;
         }
 
-        private List<FileSystemInfo> makeFileSystemInfoList(string[] uris) {
+        private List<ExFileSystemInfo> makeFileSystemInfoList(string[] uris) {
 
-            List<FileSystemInfo> fileList;
-            fileList = new List<FileSystemInfo>();
+            List<ExFileSystemInfo> fileList;
+            fileList = new List<ExFileSystemInfo>();
 
             foreach(string uriString in uris) {
                 fileList.Add(new ExFileSystemInfo(uriString));
