@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using FileRenamer.Models;
+using Prism.Mvvm;
 using System.Collections.Generic;
 using System.IO;
 
@@ -12,8 +13,8 @@ namespace FileRenamer.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        private List<FileSystemInfo> fileList = new List<FileSystemInfo>();
-        public List<FileSystemInfo> FileList { get => fileList; set => SetProperty(ref fileList, value); }
+        private List<ExFileSystemInfo> fileList = new List<ExFileSystemInfo>();
+        public List<ExFileSystemInfo> FileList { get => fileList; set => SetProperty(ref fileList, value); }
 
         public MainWindowViewModel() {
 
