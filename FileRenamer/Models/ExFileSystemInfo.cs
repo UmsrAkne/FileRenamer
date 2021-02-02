@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FileRenamer.Models {
-    public class ExFileSystemInfo : FileSystemInfo {
+    public class ExFileSystemInfo {
 
         private FileSystemInfo fileSystemInfo;
         public bool IsDirectory { get; private set; }
@@ -23,16 +23,16 @@ namespace FileRenamer.Models {
             }
         }
 
-        public override string Name =>
+        public string Name =>
             (IsDirectory) ? fileSystemInfo.Name : Path.GetFileNameWithoutExtension(fileSystemInfo.FullName);
 
-        public override string FullName => fileSystemInfo.FullName;
+        public string FullName => fileSystemInfo.FullName;
 
-        public new string Extension => (IsDirectory) ? "/" : fileSystemInfo.Extension;
+        public string Extension => (IsDirectory) ? "/" : fileSystemInfo.Extension;
 
-        public override bool Exists => fileSystemInfo.Exists;
+        public bool Exists => fileSystemInfo.Exists;
 
-        public override void Delete() {
+        public void Delete() {
             fileSystemInfo.Delete();
         }
     }
