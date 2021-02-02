@@ -21,6 +21,8 @@ namespace FileRenamer.Models {
             else {
                 fileSystemInfo = new FileInfo(filePath);
             }
+
+            AfterName = Name;
         }
 
         public string Name =>
@@ -30,10 +32,27 @@ namespace FileRenamer.Models {
 
         public string Extension => (IsDirectory) ? "/" : fileSystemInfo.Extension;
 
+        public string AfterName { get; set; }
+
         public bool Exists => fileSystemInfo.Exists;
 
         public void Delete() {
             fileSystemInfo.Delete();
         }
+
+        public void rename() {
+
+            String basePath = Directory.GetParent(fileSystemInfo.FullName).FullName + "\\";
+
+            if (IsDirectory) {
+                Directory.Move(basePath + fileSystemInfo.Name, basePath + AfterName);
+                fileSystemInfo = new DirectoryInfo(basePath + AfterName);
+            }
+            else {
+                File.Move(basePath + fileSystemInfo.Name, basePath + AfterName + Extension);
+                fileSystemInfo = new FileInfo(basePath + AfterName + Extension);
+            }
+        }
+
     }
 }
