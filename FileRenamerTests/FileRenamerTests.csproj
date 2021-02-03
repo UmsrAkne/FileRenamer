@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Models\ExFileSystemInfoTests.cs" />
+    <Compile Include="Models\RenamerTests.cs" />
     <Compile Include="Models\UtilTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

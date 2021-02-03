@@ -20,7 +20,13 @@ namespace FileRenamer.Models {
         /// <param name="str"></param>
         public void insertString(int index, string str) {
             Files.ForEach(f => {
-                f.AfterName = f.AfterName.Insert(index, str);
+                if(f.AfterName.Length > index) {
+                    f.AfterName = f.AfterName.Insert(index, str);
+                }
+                else {
+                    f.AfterName += str;
+                }
+
                 f.rename();
             });
         } 
