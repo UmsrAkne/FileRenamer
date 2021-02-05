@@ -67,5 +67,45 @@ namespace FileRenamer.Models.Tests {
             renamer.attachStringToEnd("end");
             Assert.AreEqual(files[0].Name, "testFile1end");
         }
+
+        [TestMethod()]
+        public void insertNumberTest() {
+            var testDirectory = new DirectoryInfo("testDirectory");
+            if (testDirectory.Exists) {
+                Directory.Delete("testDirectory", true);
+            }
+
+            testDirectory.Create();
+            List<FileInfo> testFiles = new List<FileInfo>();
+
+            for(int i = 0; i < 11; i++) {
+                testFiles.Add(new FileInfo($"testDirectory/testFile{i.ToString()}.txt"));
+                testFiles[i].Create().Close();
+            }
+
+            var files = new List<ExFileSystemInfo>();
+
+            for(int i = 0; i < testFiles.Count; i++) {
+                files.Add(new ExFileSystemInfo(testFiles[i].FullName));
+            }
+
+            Renamer renamer = new Renamer(files);
+            renamer.insertNumber(0);
+            Assert.AreEqual(files[0].Name, "0testFile0");
+            Assert.AreEqual(files[1].Name, "1testFile1");
+            Assert.AreEqual(files[10].Name, "10testFile10");
+
+            renamer.insertNumber(0, 1, 3);
+            Assert.AreEqual(files[0].Name, "0010testFile0");
+            Assert.AreEqual(files[10].Name, "01110testFile10");
+
+            files[0].AfterName = "testFile";
+            files[0].rename();
+            renamer.insertNumber(1, 1, 3);
+            Assert.AreEqual(files[0].Name, "t001estFile");
+
+            renamer.attachNumberToEnd(2, 3);
+            Assert.AreEqual(files[0].Name, "t001estFile002");
+        }
     }
 }
