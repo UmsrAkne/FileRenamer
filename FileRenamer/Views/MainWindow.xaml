@@ -7,11 +7,31 @@
         xmlns:models="clr-namespace:FileRenamer.Models"
         Title="{Binding Title}" Height="350" Width="600">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0"
+                    Margin="8,0,0,2"
+                    x:Name="fileListHeaderStackPanel"
+                    >
+
+            <TextBlock Text="parentDirectory" Width="120" />
+            <TextBlock Text="current name" Width="200"/>
+            <TextBlock Text="after name" Width="200"/>
+            <TextBlock Text="type" Width="30"/>
+
+        </StackPanel>
 
         <ListView Name="fileListView"
                   ItemsSource="{Binding FileList}"
                   AllowDrop="True"
+                  Grid.Row="1"
                   >
 
             <ListView.ItemTemplate>
