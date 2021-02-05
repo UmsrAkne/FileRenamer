@@ -34,6 +34,8 @@ namespace FileRenamer.Models {
 
         public string AfterName { get; set; }
 
+        public string ParentDirectoryName => Directory.GetParent(fileSystemInfo.FullName).Name;
+
         public bool Exists => fileSystemInfo.Exists;
 
         public void Delete() {
