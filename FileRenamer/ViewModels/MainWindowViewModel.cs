@@ -34,11 +34,23 @@ namespace FileRenamer.ViewModels
             #region
             get => attachNumberCommand ?? (attachNumberCommand = new DelegateCommand(() => {
                 renamer.Files = FileList;
-                renamer.insertNumber(RenameOption.InsertIndex, RenameOption.StartCount, RenameOption.Digits);
+                renamer.insertNumber(RenameOption.NumberInsertIndex, RenameOption.StartCount, RenameOption.Digits);
             }));
         }
         private DelegateCommand attachNumberCommand;
         #endregion
+
+
+        public DelegateCommand AttachStringCommand {
+            #region
+            get => attachStringCommand ?? (attachStringCommand = new DelegateCommand(() => {
+                renamer.Files = fileList;
+                renamer.insertString(RenameOption.StringInsertIndex, RenameOption.AttachmentString);
+            }));
+        }
+        private DelegateCommand attachStringCommand;
+        #endregion
+
 
     }
 }

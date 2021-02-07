@@ -15,11 +15,17 @@ namespace FileRenamer.Models {
         private string attachmentString = "";
 
 
-        public int InsertIndex {
-            get => insertIndex; set => SetProperty(ref insertIndex, value);
+        public int NumberInsertIndex {
+            get => numberInsertIndex; set => SetProperty(ref numberInsertIndex, value);
         }
 
-        private int insertIndex = 0;
+        private int numberInsertIndex = 0;
+
+        public int StringInsertIndex {
+            get => stringInsertIndex; set => SetProperty(ref stringInsertIndex, value);
+        }
+
+        private int stringInsertIndex;
 
 
         public int Digits {
