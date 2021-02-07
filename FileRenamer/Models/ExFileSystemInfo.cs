@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FileRenamer.Models {
-    public class ExFileSystemInfo {
+    public class ExFileSystemInfo : BindableBase{
 
         private FileSystemInfo fileSystemInfo;
         public bool IsDirectory { get; private set; }
@@ -54,6 +55,10 @@ namespace FileRenamer.Models {
                 File.Move(basePath + fileSystemInfo.Name, basePath + AfterName + Extension);
                 fileSystemInfo = new FileInfo(basePath + AfterName + Extension);
             }
+
+            RaisePropertyChanged(nameof(Name));
+            RaisePropertyChanged(nameof(AfterName));
+            RaisePropertyChanged(nameof(FullName));
         }
 
     }
