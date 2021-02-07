@@ -32,14 +32,17 @@ namespace FileRenamer.Models.Tests {
 
             Renamer renamer = new Renamer(files);
             renamer.insertString(0, "insert");
+            renamer.rename();
 
             Assert.AreEqual(files[0].Name, "inserttestFile1");
             Assert.AreEqual(files[1].Name, "inserttestFile2");
 
             renamer.insertString(1, "i");
+            renamer.rename();
             Assert.AreEqual(files[0].Name, "iinserttestFile1");
 
             renamer.insertString(50, "x");
+            renamer.rename();
             Assert.AreEqual(files[0].Name, "iinserttestFile1x");
         }
 
@@ -65,6 +68,7 @@ namespace FileRenamer.Models.Tests {
 
             Renamer renamer = new Renamer(files);
             renamer.attachStringToEnd("end");
+            renamer.rename();
             Assert.AreEqual(files[0].Name, "testFile1end");
         }
 
@@ -91,20 +95,24 @@ namespace FileRenamer.Models.Tests {
 
             Renamer renamer = new Renamer(files);
             renamer.insertNumber(0);
+            renamer.rename();
             Assert.AreEqual(files[0].Name, "0testFile0");
             Assert.AreEqual(files[1].Name, "1testFile1");
             Assert.AreEqual(files[10].Name, "10testFile10");
 
             renamer.insertNumber(0, 1, 3);
+            renamer.rename();
             Assert.AreEqual(files[0].Name, "0010testFile0");
             Assert.AreEqual(files[10].Name, "01110testFile10");
 
             files[0].AfterName = "testFile";
             files[0].rename();
             renamer.insertNumber(1, 1, 3);
+            renamer.rename();
             Assert.AreEqual(files[0].Name, "t001estFile");
 
             renamer.attachNumberToEnd(2, 3);
+            renamer.rename();
             Assert.AreEqual(files[0].Name, "t001estFile002");
         }
     }

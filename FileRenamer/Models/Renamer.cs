@@ -27,7 +27,6 @@ namespace FileRenamer.Models {
                     f.AfterName += str;
                 }
 
-                f.rename();
             });
         } 
 
@@ -38,7 +37,6 @@ namespace FileRenamer.Models {
         public void attachStringToEnd(string str) {
             Files.ForEach(f => {
                 f.AfterName += str;
-                f.rename();
             });
         }
 
@@ -59,13 +57,16 @@ namespace FileRenamer.Models {
                     f.AfterName += countString;
                 }
 
-                f.rename();
                 startCount++;
             });
         }
 
         public void attachNumberToEnd(int startCount = 0, int digits = 1) {
             insertNumber(int.MaxValue, startCount, digits);
+        }
+
+        public void rename() {
+            Files.ForEach(f => f.rename());
         }
     }
 }
