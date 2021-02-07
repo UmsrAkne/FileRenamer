@@ -79,5 +79,95 @@
             </i:Interaction.Behaviors>
         </ListView>
 
+        <TabControl Grid.Row="2">
+            <TabItem Header="連番付与" >
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="MinWidth" Value="40" />
+                        </Style>
+
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                               
+                    </Grid.Resources>
+
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="番号をつける位置 : " />
+                        <TextBox Text="{Binding RenameOption.NumberInsertIndex}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="開始番号 : " />
+                        <TextBox Text="{Binding RenameOption.StartCount}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="桁数 : " />
+                        <TextBox Text="{Binding RenameOption.Digits}"/>
+                    </StackPanel>
+
+                    <Button Content="Rename"
+                            Grid.Column="3"
+                            Command="{Binding AttachNumberCommand}"
+                            />
+
+                </Grid>
+
+
+            </TabItem>
+
+            <TabItem Header="文字列付与" >
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="MinWidth" Value="40" />
+                        </Style>
+
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Orientation" Value="Horizontal" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                               
+                    </Grid.Resources>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="挿入する文字列 : " />
+                        <TextBox Text="{Binding RenameOption.AttachmentString}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="挿入位置 : " />
+                        <TextBox Text="{Binding RenameOption.StringInsertIndex}"/>
+                    </StackPanel>
+
+                    <Button Content="Rename"
+                            Grid.Column="3"
+                            Command="{Binding AttachStringCommand}"
+                            />
+
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>

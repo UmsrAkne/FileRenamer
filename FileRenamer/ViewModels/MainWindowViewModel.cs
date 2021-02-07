@@ -1,4 +1,5 @@
 ﻿using FileRenamer.Models;
+using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.IO;
@@ -16,8 +17,40 @@ namespace FileRenamer.ViewModels
         private List<ExFileSystemInfo> fileList = new List<ExFileSystemInfo>();
         public List<ExFileSystemInfo> FileList { get => fileList; set => SetProperty(ref fileList, value); }
 
-        public MainWindowViewModel() {
+        private Renamer renamer;
 
+        public RenameOption RenameOption {
+            get => renameOption; set => SetProperty(ref renameOption, value); 
         }
+
+        private RenameOption renameOption = new RenameOption();
+
+        public MainWindowViewModel() {
+            renamer = new Renamer(FileList);
+        }
+
+
+        public DelegateCommand AttachNumberCommand {
+            #region
+            get => attachNumberCommand ?? (attachNumberCommand = new DelegateCommand(() => {
+                renamer.Files = FileList;
+                renamer.insertNumber(RenameOption.NumberInsertIndex, RenameOption.StartCount, RenameOption.Digits);
+            }));
+        }
+        private DelegateCommand attachNumberCommand;
+        #endregion
+
+
+        public DelegateCommand AttachStringCommand {
+            #region
+            get => attachStringCommand ?? (attachStringCommand = new DelegateCommand(() => {
+                renamer.Files = fileList;
+                renamer.insertString(RenameOption.StringInsertIndex, RenameOption.AttachmentString);
+            }));
+        }
+        private DelegateCommand attachStringCommand;
+        #endregion
+
+
     }
 }
