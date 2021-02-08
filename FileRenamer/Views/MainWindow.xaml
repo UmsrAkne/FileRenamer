@@ -118,7 +118,7 @@
                         <TextBox Text="{Binding RenameOption.Digits}"/>
                     </StackPanel>
 
-                    <Button Content="Rename"
+                    <Button Content="Apply"
                             Grid.Column="3"
                             Command="{Binding AttachNumberCommand}"
                             />
@@ -159,7 +159,7 @@
                         <TextBox Text="{Binding RenameOption.StringInsertIndex}"/>
                     </StackPanel>
 
-                    <Button Content="Rename"
+                    <Button Content="Aplly"
                             Grid.Column="3"
                             Command="{Binding AttachStringCommand}"
                             />
