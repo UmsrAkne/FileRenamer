@@ -6,10 +6,16 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:models="clr-namespace:FileRenamer.Models"
         Title="{Binding Title}" Height="350" Width="600">
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Modifiers="Ctrl" Command="{Binding RenameCommand}" />
+    </Window.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
 
         </Grid.RowDefinitions>
@@ -118,7 +124,7 @@
                         <TextBox Text="{Binding RenameOption.Digits}"/>
                     </StackPanel>
 
-                    <Button Content="Rename"
+                    <Button Content="Apply"
                             Grid.Column="3"
                             Command="{Binding AttachNumberCommand}"
                             />
@@ -159,7 +165,7 @@
                         <TextBox Text="{Binding RenameOption.StringInsertIndex}"/>
                     </StackPanel>
 
-                    <Button Content="Rename"
+                    <Button Content="Aplly"
                             Grid.Column="3"
                             Command="{Binding AttachStringCommand}"
                             />
@@ -168,6 +174,21 @@
 
             </TabItem>
         </TabControl>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Rename (Ctrl + Enter)"
+                    Grid.Column="2"
+                    Command="{Binding RenameCommand}"
+                    />
+        </Grid>
+
+
 
     </Grid>
 </Window>

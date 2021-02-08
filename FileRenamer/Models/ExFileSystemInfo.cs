@@ -33,7 +33,8 @@ namespace FileRenamer.Models {
 
         public string Extension => (IsDirectory) ? "/" : fileSystemInfo.Extension;
 
-        public string AfterName { get; set; }
+        public string AfterName { get => afterName; set => SetProperty(ref afterName, value); }
+        private string afterName = "";
 
         public string ParentDirectoryName => Directory.GetParent(fileSystemInfo.FullName).Name;
 

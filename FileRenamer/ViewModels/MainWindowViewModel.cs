@@ -52,5 +52,15 @@ namespace FileRenamer.ViewModels
         #endregion
 
 
+        public DelegateCommand RenameCommand {
+            #region
+            get => renameCommand ?? (renameCommand = new DelegateCommand(() => {
+                renamer.Files = fileList;
+                renamer.rename();
+            }));
+        }
+        private DelegateCommand renameCommand;
+        #endregion
+
     }
 }
