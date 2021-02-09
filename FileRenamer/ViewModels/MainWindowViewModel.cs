@@ -29,6 +29,8 @@ namespace FileRenamer.ViewModels
             renamer = new Renamer(FileList);
         }
 
+        public FileListColumnName SortColumnName { get => sortColumnName; set => SetProperty(ref sortColumnName, value); }
+        private FileListColumnName sortColumnName = FileListColumnName.None;
 
         public DelegateCommand AttachNumberCommand {
             #region
@@ -61,6 +63,14 @@ namespace FileRenamer.ViewModels
         }
         private DelegateCommand renameCommand;
         #endregion
+
+        public enum FileListColumnName {
+            ParentDirectory,
+            CurrentName,
+            AfterName,
+            Extension,
+            None
+        }
 
     }
 }
