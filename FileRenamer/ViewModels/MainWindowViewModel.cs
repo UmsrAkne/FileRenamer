@@ -64,11 +64,23 @@ namespace FileRenamer.ViewModels
         private DelegateCommand renameCommand;
         #endregion
 
+
+        public DelegateCommand<string> SortCommand {
+            #region
+            get => sortCommand ?? (sortCommand = new DelegateCommand<string>((string columnName) => {
+                SortColumnName = (FileListColumnName)System.Enum.Parse(typeof(FileListColumnName),columnName);
+                System.Diagnostics.Debug.WriteLine(SortColumnName);
+            }));
+        }
+        private DelegateCommand<string> sortCommand;
+        #endregion
+
+
         public enum FileListColumnName {
             ParentDirectory,
             CurrentName,
             AfterName,
-            Extension,
+            Type,
             None
         }
 

@@ -23,14 +23,35 @@
 
         <StackPanel Orientation="Horizontal"
                     Grid.Row="0"
-                    Margin="8,0,0,2"
                     x:Name="fileListHeaderStackPanel"
                     >
 
-            <TextBlock Text="parentDirectory" Width="120" />
-            <TextBlock Text="current name" Width="200"/>
-            <TextBlock Text="after name" Width="200"/>
-            <TextBlock Text="type" Width="30"/>
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+
+                    <Setter Property="CommandParameter" 
+                            Value="{Binding RelativeSource={RelativeSource Self},Path=Tag}"
+                            />
+
+                    <Setter Property="Command" Value="{Binding SortCommand}" />
+                </Style>
+            </StackPanel.Resources>
+
+            <Button Content="parentDirectory"
+                    Tag="ParentDirectory"
+                    Width="120" />
+
+            <Button Content="current name"
+                    Tag="CurrentName"
+                    Width="200"/>
+
+            <Button Content="after name"
+                    Tag="AfterName"
+                    Width="200"/>
+
+            <Button Content="type"
+                    Tag="Type"
+                    Width="30"/>
 
         </StackPanel>
 
