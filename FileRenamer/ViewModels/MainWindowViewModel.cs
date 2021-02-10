@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.IO;
+using static FileRenamer.Models.SortState;
 
 namespace FileRenamer.ViewModels
 {
@@ -18,6 +19,7 @@ namespace FileRenamer.ViewModels
         public List<ExFileSystemInfo> FileList { get => fileList; set => SetProperty(ref fileList, value); }
 
         private Renamer renamer;
+        private SortState sortState;
 
         public RenameOption RenameOption {
             get => renameOption; set => SetProperty(ref renameOption, value); 
@@ -27,6 +29,7 @@ namespace FileRenamer.ViewModels
 
         public MainWindowViewModel() {
             renamer = new Renamer(FileList);
+            sortState = new SortState();
         }
 
         public FileListColumnName SortColumnName { get => sortColumnName; set => SetProperty(ref sortColumnName, value); }
@@ -68,21 +71,12 @@ namespace FileRenamer.ViewModels
         public DelegateCommand<string> SortCommand {
             #region
             get => sortCommand ?? (sortCommand = new DelegateCommand<string>((string columnName) => {
-                SortColumnName = (FileListColumnName)System.Enum.Parse(typeof(FileListColumnName),columnName);
-                System.Diagnostics.Debug.WriteLine(SortColumnName);
+                FileListColumnName newName = (FileListColumnName)System.Enum.Parse(typeof(FileListColumnName),columnName);
+                sortState.SortColumnName = newName;
+                FileList = sortState.sort(FileList);
             }));
         }
         private DelegateCommand<string> sortCommand;
         #endregion
-
-
-        public enum FileListColumnName {
-            ParentDirectory,
-            CurrentName,
-            AfterName,
-            Type,
-            None
-        }
-
     }
 }

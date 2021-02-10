@@ -68,6 +68,7 @@
     <Compile Include="Models\ExFileSystemInfo.cs" />
     <Compile Include="Models\RenameOption.cs" />
     <Compile Include="Models\Renamer.cs" />
+    <Compile Include="Models\SortState.cs" />
     <Compile Include="Models\Util.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
