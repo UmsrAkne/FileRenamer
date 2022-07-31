@@ -1,10 +1,9 @@
-﻿using FileRenamer.Views;
-using Prism.Ioc;
-using Prism.Modularity;
-using System.Windows;
-
-namespace FileRenamer
+﻿namespace FileRenamer
 {
+    using System.Windows;
+    using FileRenamer.Views;
+    using Prism.Ioc;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -17,7 +16,6 @@ namespace FileRenamer
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
         }
     }
 }

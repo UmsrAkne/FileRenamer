@@ -31,7 +31,7 @@ namespace FileRenamer.Models.Tests {
             Assert.AreEqual(file.Name, "testFile");
 
             file.AfterName = "renamedFile";
-            file.rename();
+            file.Rename();
 
             Assert.AreEqual(file.Name, "renamedFile");
         }

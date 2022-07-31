@@ -12,11 +12,11 @@ namespace FileRenamer.Models.Tests {
         [TestMethod()]
         public void findDuplicateNameTest() {
             var list = new List<String>(new String[] { "a","b","c","c","d","d"});
-            Assert.AreEqual(Util.findDuplicateName(list)[0], "c");
-            Assert.AreEqual(Util.findDuplicateName(list)[1], "d");
+            Assert.AreEqual(Util.FindDuplicateName(list)[0], "c");
+            Assert.AreEqual(Util.FindDuplicateName(list)[1], "d");
 
             var listb = new List<String>(new String[] { "a", "b", "c" });
-            Assert.AreEqual(Util.findDuplicateName(listb).Count, 0);
+            Assert.AreEqual(Util.FindDuplicateName(listb).Count, 0);
         }
     }
 }

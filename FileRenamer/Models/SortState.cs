@@ -1,13 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FileRenamer.Models
+﻿namespace FileRenamer.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class SortState
     {
+        private FileListColumnName sortColumnName;
+        private SortType sortType;
+
+        public enum FileListColumnName
+        {
+            /// <summary>ディレクトリ名</summary>
+            ParentDirectory,
+
+            /// <summary>現在のファイル名</summary>
+            CurrentName,
+
+            /// <summary>変更後のファイル名</summary>
+            AfterName,
+
+            /// <summary>拡張子</summary>
+            Type,
+
+            /// <summary>なし</summary>
+            None,
+        }
+
+        private enum SortType
+        {
+            ASC,
+            DESC,
+            None,
+        }
 
         public FileListColumnName SortColumnName
         {
@@ -21,7 +46,6 @@ namespace FileRenamer.Models
                 }
                 else
                 {
-
                     switch (sortType)
                     {
                         case SortType.ASC:
@@ -35,13 +59,12 @@ namespace FileRenamer.Models
                         case SortType.None:
                             sortType = SortType.ASC;
                             break;
-
                     }
                 }
             }
         }
 
-        public List<ExFileSystemInfo> sort(List<ExFileSystemInfo> list)
+        public List<ExFileSystemInfo> Sort(List<ExFileSystemInfo> list)
         {
             var l = new List<ExFileSystemInfo>();
             Func<ExFileSystemInfo, string> func; // ソートの条件を先に格納してソート処理自体は最後に行う。
@@ -85,25 +108,6 @@ namespace FileRenamer.Models
             }
 
             return l;
-        }
-
-        private FileListColumnName sortColumnName;
-        private SortType sortType;
-
-        public enum FileListColumnName
-        {
-            ParentDirectory,
-            CurrentName,
-            AfterName,
-            Type,
-            None
-        }
-
-        private enum SortType
-        {
-            ASC,
-            DESC,
-            None,
         }
     }
 }
