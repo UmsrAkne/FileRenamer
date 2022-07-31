@@ -9,10 +9,13 @@ using System.Windows.Controls;
 using FileRenamer.ViewModels;
 using Microsoft.Xaml.Behaviors;
 
-namespace FileRenamer.Models {
-    class DropBehavior : Behavior<ListView>{
+namespace FileRenamer.Models
+{
+    class DropBehavior : Behavior<ListView>
+    {
 
-        protected override void OnAttached() {
+        protected override void OnAttached()
+        {
             base.OnAttached();
 
             // ファイルをドラッグしてきて、コントロール上に乗せた際の処理
@@ -22,30 +25,35 @@ namespace FileRenamer.Models {
             this.AssociatedObject.Drop += AssociatedObject_Drop;
         }
 
-        private void AssociatedObject_Drop(object sender, DragEventArgs e) {
+        private void AssociatedObject_Drop(object sender, DragEventArgs e)
+        {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
             var vm = ((ListView)sender).DataContext as MainWindowViewModel;
             vm.FileList = makeFileSystemInfoList(files);
         }
 
-        private void AssociatedObject_PreviewDragOver(object sender, DragEventArgs e) {
+        private void AssociatedObject_PreviewDragOver(object sender, DragEventArgs e)
+        {
             e.Effects = DragDropEffects.Copy;
             e.Handled = e.Data.GetDataPresent(DataFormats.FileDrop);
         }
 
-        protected override void OnDetaching() {
+        protected override void OnDetaching()
+        {
             base.OnDetaching();
             this.AssociatedObject.PreviewDragOver -= AssociatedObject_PreviewDragOver;
             this.AssociatedObject.Drop -= AssociatedObject_Drop;
         }
 
-        private List<ExFileSystemInfo> makeFileSystemInfoList(string[] uris) {
+        private List<ExFileSystemInfo> makeFileSystemInfoList(string[] uris)
+        {
 
             List<ExFileSystemInfo> fileList;
             fileList = new List<ExFileSystemInfo>();
 
-            foreach(string uriString in uris) {
+            foreach (string uriString in uris)
+            {
                 fileList.Add(new ExFileSystemInfo(uriString));
             }
 

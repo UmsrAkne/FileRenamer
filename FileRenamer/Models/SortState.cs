@@ -4,19 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileRenamer.Models {
-    public class SortState {
+namespace FileRenamer.Models
+{
+    public class SortState
+    {
 
-        public FileListColumnName SortColumnName {
+        public FileListColumnName SortColumnName
+        {
             get => sortColumnName;
-            set {
-                if(value != sortColumnName) {
+            set
+            {
+                if (value != sortColumnName)
+                {
                     sortColumnName = value;
                     sortType = SortType.ASC;
                 }
-                else {
+                else
+                {
 
-                    switch (sortType) {
+                    switch (sortType)
+                    {
                         case SortType.ASC:
                             sortType = SortType.DESC;
                             break;
@@ -34,11 +41,13 @@ namespace FileRenamer.Models {
             }
         }
 
-        public List<ExFileSystemInfo> sort(List<ExFileSystemInfo> list) {
+        public List<ExFileSystemInfo> sort(List<ExFileSystemInfo> list)
+        {
             var l = new List<ExFileSystemInfo>();
             Func<ExFileSystemInfo, string> func; // ソートの条件を先に格納してソート処理自体は最後に行う。
 
-            switch (SortColumnName) {
+            switch (SortColumnName)
+            {
                 case FileListColumnName.CurrentName:
                     func = new Func<ExFileSystemInfo, string>(f => f.Name);
                     break;
@@ -60,15 +69,18 @@ namespace FileRenamer.Models {
                     break;
             }
 
-            if(sortType == SortType.ASC) {
+            if (sortType == SortType.ASC)
+            {
                 l = list.OrderBy(func).ToList<ExFileSystemInfo>();
             }
 
-            if(sortType == SortType.DESC) {
+            if (sortType == SortType.DESC)
+            {
                 l = list.OrderByDescending(func).ToList<ExFileSystemInfo>();
             }
 
-            if(sortType == SortType.None) {
+            if (sortType == SortType.None)
+            {
                 l = list.OrderBy(func).ToList<ExFileSystemInfo>();
             }
 
@@ -78,7 +90,8 @@ namespace FileRenamer.Models {
         private FileListColumnName sortColumnName;
         private SortType sortType;
 
-        public enum FileListColumnName {
+        public enum FileListColumnName
+        {
             ParentDirectory,
             CurrentName,
             AfterName,
@@ -86,7 +99,8 @@ namespace FileRenamer.Models {
             None
         }
 
-        private enum SortType {
+        private enum SortType
+        {
             ASC,
             DESC,
             None,

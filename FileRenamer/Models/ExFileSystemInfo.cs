@@ -6,20 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileRenamer.Models {
-    public class ExFileSystemInfo : BindableBase{
+namespace FileRenamer.Models
+{
+    public class ExFileSystemInfo : BindableBase
+    {
 
         private FileSystemInfo fileSystemInfo;
         public bool IsDirectory { get; private set; }
 
-        public ExFileSystemInfo(string filePath) {
+        public ExFileSystemInfo(string filePath)
+        {
 
             IsDirectory = File.GetAttributes(filePath).HasFlag(FileAttributes.Directory);
 
-            if (IsDirectory) {
+            if (IsDirectory)
+            {
                 fileSystemInfo = new DirectoryInfo(filePath);
             }
-            else {
+            else
+            {
                 fileSystemInfo = new FileInfo(filePath);
             }
 
@@ -40,19 +45,23 @@ namespace FileRenamer.Models {
 
         public bool Exists => fileSystemInfo.Exists;
 
-        public void Delete() {
+        public void Delete()
+        {
             fileSystemInfo.Delete();
         }
 
-        public void rename() {
+        public void rename()
+        {
 
             String basePath = Directory.GetParent(fileSystemInfo.FullName).FullName + "\\";
 
-            if (IsDirectory) {
+            if (IsDirectory)
+            {
                 Directory.Move(basePath + fileSystemInfo.Name, basePath + AfterName);
                 fileSystemInfo = new DirectoryInfo(basePath + AfterName);
             }
-            else {
+            else
+            {
                 File.Move(basePath + fileSystemInfo.Name, basePath + AfterName + Extension);
                 fileSystemInfo = new FileInfo(basePath + AfterName + Extension);
             }

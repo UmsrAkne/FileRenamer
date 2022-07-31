@@ -10,7 +10,8 @@ namespace FileRenamer.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private string _title = "Prism Application";
-        public string Title {
+        public string Title
+        {
             get { return _title; }
             set { SetProperty(ref _title, value); }
         }
@@ -21,13 +22,15 @@ namespace FileRenamer.ViewModels
         private Renamer renamer;
         private SortState sortState;
 
-        public RenameOption RenameOption {
-            get => renameOption; set => SetProperty(ref renameOption, value); 
+        public RenameOption RenameOption
+        {
+            get => renameOption; set => SetProperty(ref renameOption, value);
         }
 
         private RenameOption renameOption = new RenameOption();
 
-        public MainWindowViewModel() {
+        public MainWindowViewModel()
+        {
             renamer = new Renamer(FileList);
             sortState = new SortState();
         }
@@ -35,9 +38,11 @@ namespace FileRenamer.ViewModels
         public FileListColumnName SortColumnName { get => sortColumnName; set => SetProperty(ref sortColumnName, value); }
         private FileListColumnName sortColumnName = FileListColumnName.None;
 
-        public DelegateCommand AttachNumberCommand {
+        public DelegateCommand AttachNumberCommand
+        {
             #region
-            get => attachNumberCommand ?? (attachNumberCommand = new DelegateCommand(() => {
+            get => attachNumberCommand ?? (attachNumberCommand = new DelegateCommand(() =>
+            {
                 renamer.Files = FileList;
                 renamer.insertNumber(RenameOption.NumberInsertIndex, RenameOption.StartCount, RenameOption.Digits);
             }));
@@ -46,9 +51,11 @@ namespace FileRenamer.ViewModels
         #endregion
 
 
-        public DelegateCommand AttachStringCommand {
+        public DelegateCommand AttachStringCommand
+        {
             #region
-            get => attachStringCommand ?? (attachStringCommand = new DelegateCommand(() => {
+            get => attachStringCommand ?? (attachStringCommand = new DelegateCommand(() =>
+            {
                 renamer.Files = fileList;
                 renamer.insertString(RenameOption.StringInsertIndex, RenameOption.AttachmentString);
             }));
@@ -57,9 +64,11 @@ namespace FileRenamer.ViewModels
         #endregion
 
 
-        public DelegateCommand RenameCommand {
+        public DelegateCommand RenameCommand
+        {
             #region
-            get => renameCommand ?? (renameCommand = new DelegateCommand(() => {
+            get => renameCommand ?? (renameCommand = new DelegateCommand(() =>
+            {
                 renamer.Files = fileList;
                 renamer.rename();
             }));
@@ -68,10 +77,12 @@ namespace FileRenamer.ViewModels
         #endregion
 
 
-        public DelegateCommand<string> SortCommand {
+        public DelegateCommand<string> SortCommand
+        {
             #region
-            get => sortCommand ?? (sortCommand = new DelegateCommand<string>((string columnName) => {
-                FileListColumnName newName = (FileListColumnName)System.Enum.Parse(typeof(FileListColumnName),columnName);
+            get => sortCommand ?? (sortCommand = new DelegateCommand<string>((string columnName) =>
+            {
+                FileListColumnName newName = (FileListColumnName)System.Enum.Parse(typeof(FileListColumnName), columnName);
                 sortState.SortColumnName = newName;
                 FileList = sortState.sort(FileList);
             }));
