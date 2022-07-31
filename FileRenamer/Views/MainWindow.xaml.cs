@@ -1,7 +1,7 @@
-﻿using System.Windows;
-
-namespace FileRenamer.Views
+﻿namespace FileRenamer.Views
 {
+    using System.Windows;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

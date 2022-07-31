@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace FileRenamer.Models
+{
+    using System.Collections.Generic;
 
-namespace FileRenamer.Models {
-    public class Renamer {
-
-        public Renamer(List<ExFileSystemInfo> targetFiles) {
+    public class Renamer
+    {
+        public Renamer(List<ExFileSystemInfo> targetFiles)
+        {
             Files = targetFiles;
         }
 
@@ -16,26 +14,31 @@ namespace FileRenamer.Models {
         /// <summary>
         /// リスト内のファイルの Name プロパティに対して、引数で指定された位置に文字列を挿入します。
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="str"></param>
-        public void insertString(int index, string str) {
-            Files.ForEach(f => {
-                if(f.AfterName.Length > index) {
+        /// <param name="index">文字列を挿入する位置</param>
+        /// <param name="str">挿入する文字列</param>
+        public void InsertString(int index, string str)
+        {
+            Files.ForEach(f =>
+            {
+                if (f.AfterName.Length > index)
+                {
                     f.AfterName = f.AfterName.Insert(index, str);
                 }
-                else {
+                else
+                {
                     f.AfterName += str;
                 }
-
             });
-        } 
+        }
 
         /// <summary>
         /// リスト内のファイルの Nameプロパティの末尾に、引数で指定した文字列を追加します。
         /// </summary>
-        /// <param name="str"></param>
-        public void attachStringToEnd(string str) {
-            Files.ForEach(f => {
+        /// <param name="str">付与する文字列</param>
+        public void AttachStringToEnd(string str)
+        {
+            Files.ForEach(f =>
+            {
                 f.AfterName += str;
             });
         }
@@ -46,14 +49,18 @@ namespace FileRenamer.Models {
         /// <param name="index">連番の挿入位置を指定します。先頭は０番です。</param>
         /// <param name="startCount">連番の開始番号を指定します。未指定の場合は０からとなります。</param>
         /// <param name="digits">連番が指定した桁数になるよう０を挿入して調節します。</param>
-        public void insertNumber(int index, int startCount = 0, int digits = 1) {
-            Files.ForEach(f => {
-                string countString = String.Format("{0:D" + digits.ToString() + "}" ,startCount);
+        public void InsertNumber(int index, int startCount = 0, int digits = 1)
+        {
+            Files.ForEach(f =>
+            {
+                string countString = string.Format("{0:D" + digits.ToString() + "}", startCount);
 
-                if(f.AfterName.Length > index) {
-                    f.AfterName = f.AfterName.Insert(index,countString);
+                if (f.AfterName.Length > index)
+                {
+                    f.AfterName = f.AfterName.Insert(index, countString);
                 }
-                else {
+                else
+                {
                     f.AfterName += countString;
                 }
 
@@ -61,12 +68,14 @@ namespace FileRenamer.Models {
             });
         }
 
-        public void attachNumberToEnd(int startCount = 0, int digits = 1) {
-            insertNumber(int.MaxValue, startCount, digits);
+        public void AttachNumberToEnd(int startCount = 0, int digits = 1)
+        {
+            InsertNumber(int.MaxValue, startCount, digits);
         }
 
-        public void rename() {
-            Files.ForEach(f => f.rename());
+        public void Rename()
+        {
+            Files.ForEach(f => f.Rename());
         }
     }
 }
